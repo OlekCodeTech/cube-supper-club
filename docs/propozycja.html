@@ -321,8 +321,8 @@ td:first-child { white-space: nowrap; font-style: italic; }
   <ul>
     <li><strong>Link:</strong> <code>…/t/k7q2m9xa4d</code>. Losowy, 10-znakowy token, którego nie da się zgadnąć i który nie zawiera imienia ani maila. Link działa jak klucz, więc gość nie zakłada konta i nie pamięta hasła. Strona jest wyłączona z wyszukiwarek.</li>
     <li><strong>Co jest na stronie:</strong> tylko imię gościa, jego kolacje i wspólne archiwum. Nie ma nazwisk innych gości, kontaktów ani niczyich odpowiedzi. Nawet przekazany dalej link nie ujawnia nikogo innego.</li>
-    <li><strong>Dane:</strong> prosta tabela gości (imię, mail, kolacje, opcjonalna notatka, token) w arkuszu lub Airtable. Z niej generuje się statyczna strona (Next.js). Nowa kolacja to nowy wiersz i jedno zdjęcie, a potem przebudowanie strony. Bez panelu administracyjnego do utrzymania.</li>
-    <li><strong>Odpowiedzi:</strong> formularz wysyła je do małej funkcji serwerowej (np. Supabase), która zapisuje je w tabeli i od razu wysyła Michałowi maila z treścią. Michał czyta je w skrzynce lub w tabeli. Nie budujemy CRM-u.</li>
+    <li><strong>Dane:</strong> jedna baza (Supabase, serwery w UE) z gośćmi, kolacjami, odpowiedziami, notatkami i introdukcjami. Strona gościa i panel Michała korzystają z tej samej bazy. Nową kolację i gości Michał dodaje w panelu, a nie w kodzie.</li>
+    <li><strong>Odpowiedzi:</strong> formularz wysyła je do małej funkcji serwerowej (np. Supabase), która zapisuje je w tabeli i od razu wysyła Michałowi maila z treścią. Michał czyta je w skrzynce i w panelu Host’s Book (rozdział VI).</li>
     <li><strong>Wysyłka:</strong> maile wychodzą ze skrzynki Michała (mail merge), a nie z systemu newsletterowego. Mają wyglądać i brzmieć jak osobista wiadomość.</li>
     <li><strong>RODO:</strong> krótka informacja o administratorze i celu przy formularzu, wybór sposobu użycia odpowiedzi oraz usunięcie danych na prośbę gościa.</li>
     <li><strong>Hosting:</strong> statyczny hosting (np. Vercel lub Netlify) pod subdomeną, np. <code>table.cubesupperclub.com</code>. Koszty utrzymania są bliskie zera.</li>
@@ -342,8 +342,63 @@ td:first-child { white-space: nowrap; font-style: italic; }
   </div>
 </section>
 
+<section id="host">
+  <span class="no">VI — BEHIND THE TABLE</span>
+  <h2>Host’s Book: zaplecze, które widzi tylko Michał</h2>
+  <p>Brief mówi, że nie chcemy CRM-u <em>widocznego dla uczestników</em>. Jednocześnie oczekuje, że odpowiedzi pomogą Michałowi „w odpowiednim momencie proponować przemyślane introdukcje”, że system przypisze gości do kolacji i że informacje będą udostępniane tylko „za odpowiednim uzgodnieniem”. Bez zaplecza odpowiedzi trafią do skrzynki i tam zginą, a obietnica „The conversation continues” będzie pusta.</p>
+  <p>Dlatego proponuję mały, prywatny panel dla Michała: <strong>Host’s Book</strong>. Gość nigdy go nie widzi i nic się dla niego nie zmienia. Panel jest po angielsku, w tym samym stylu co strona.</p>
+
+  <div class="flow" role="img" aria-label="Schemat: strona gościa i panel Michała korzystają z jednej bazy; gość widzi tylko swoją stronę">
+    <svg viewBox="0 0 760 170" xmlns="http://www.w3.org/2000/svg">
+      <defs><marker id="ah2" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path class="arrow" d="M0 0 L8 4 L0 8 z"/></marker></defs>
+      <rect x="4" y="52" width="190" height="66"/>
+      <text x="99" y="80" text-anchor="middle">Strona gościa</text>
+      <text x="99" y="99" text-anchor="middle" class="sub">tylko własne kolacje i odpowiedzi</text>
+      <path d="M194 85 H282" marker-end="url(#ah2)"/>
+      <text x="238" y="74" text-anchor="middle" class="sub">odpowiedzi</text>
+      <rect x="286" y="52" width="188" height="66" class="hl"/>
+      <text x="380" y="80" text-anchor="middle">Jedna baza (UE)</text>
+      <text x="380" y="99" text-anchor="middle" class="sub">goście · kolacje · introdukcje</text>
+      <path d="M566 85 H478" marker-end="url(#ah2)"/>
+      <path d="M478 85 H566" marker-end="url(#ah2)"/>
+      <rect x="570" y="52" width="186" height="66"/>
+      <text x="663" y="80" text-anchor="middle">Host’s Book</text>
+      <text x="663" y="99" text-anchor="middle" class="sub">tylko Michał, po zalogowaniu</text>
+    </svg>
+  </div>
+
+  <h3>Co jest w środku</h3>
+  <ul>
+    <li><strong>Today.</strong> Nowe odpowiedzi do przeczytania, introdukcje w toku i delikatne przypomnienia: „James nie odpowiedział od miesiąca”, „Olivia odpowiedziała pół roku temu, czas na ‘Has anything changed?’”.</li>
+    <li><strong>Karta gościa.</strong> Kolacje, aktualne odpowiedzi i ich historia, prywatne notatki Michała, tagi. Przy odpowiedziach zawsze widać, na co gość się zgodził: „tylko dla Michała” albo „można wspomnieć przy introdukcji”.</li>
+    <li><strong>Rejestr introdukcji z podwójną zgodą.</strong> Kogo z kim i dlaczego. Michał osobno pyta każdą stronę, a „Mark as introduced” odblokowuje się dopiero po dwóch „tak”. Potem: spotkali się, co z tego wyszło. To z czasem pokazuje, co Cube naprawdę daje ludziom.</li>
+    <li><strong>Podpowiedzi AI.</strong> System zestawia „czego szuka X” z „co może dać Y” i proponuje pary z krótkim uzasadnieniem. Decyduje zawsze Michał. Gość nigdy nie widzi dopasowań, zgodnie z briefem.</li>
+    <li><strong>Tables.</strong> Wszystkie kolacje, kto przy nich siedział, ile osób odpowiedziało, które zdjęcia są do wgrania.</li>
+    <li><strong>Szkice maili.</strong> Zaproszenie i „Has anything changed?” z osobistym linkiem, tworzone jako wersje robocze w Gmailu Michała. Wysyła je sam, więc pozostają osobiste.</li>
+  </ul>
+
+  <h3>Dlaczego własny panel, a nie Airtable czy Notion</h3>
+  <p>Gotowe narzędzie byłoby szybsze na start. Rejestr introdukcji z podwójną zgodą, podpowiedzi AI i planer stołu byłyby w nim jednak toporne, a dane gości leżałyby w kolejnym zewnętrznym serwisie. Bazę i tak budujemy, żeby formularz miał gdzie zapisywać odpowiedzi. Panel na tej bazie to kilka ekranów, a nie osobny system.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Etap</th><th>Zakres</th></tr></thead>
+      <tbody>
+        <tr><td>1 · ze stroną</td><td>Goście, kolacje, generowanie linków, odpowiedzi, notatki, statusy „wysłany / odpowiedział”, szkice maili.</td></tr>
+        <tr><td>2</td><td>Rejestr introdukcji z podwójną zgodą, podpowiedzi AI, historia odpowiedzi.</td></tr>
+        <tr><td>3</td><td>Planer następnego stołu (miks branż, „ci już siedzieli razem”) i ścieżka nowych gości: zaproszenie, potwierdzenie, dieta.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="decision">
+    <span class="label">Odpowiedzialność za dane</span>
+    <p>Własny panel oznacza, że to my, a nie dostawca SaaS, odpowiadamy za dane osobowe gości. Proponuję od początku: serwery w UE, logowanie tylko dla Michała (z kodem jednorazowym), usuwanie i eksport danych gościa jednym kliknięciem oraz krótką politykę prywatności przy formularzu.</p>
+  </div>
+</section>
+
 <section id="rekomendacje">
-  <span class="no">VI — RECOMMENDATIONS</span>
+  <span class="no">VII — RECOMMENDATIONS</span>
   <h2>Co od razu, co później</h2>
   <div class="split">
     <div>
@@ -355,14 +410,15 @@ td:first-child { white-space: nowrap; font-style: italic; }
         <li>Wariant dla gości z kilku kolacji.</li>
         <li>Karta typograficzna dla kolacji bez zdjęcia.</li>
         <li>Szablon maila od Michała.</li>
+        <li>Host’s Book, etap 1: goście, odpowiedzi, notatki, linki.</li>
       </ul>
     </div>
     <div>
       <h3>Później</h3>
       <ul>
-        <li>Ścieżka dla nowych gości (zaproszenie i potwierdzenie).</li>
+        <li>Host’s Book, etap 2: rejestr introdukcji i podpowiedzi AI.</li>
+        <li>Host’s Book, etap 3: planer stołu i ścieżka nowych gości (zaproszenie i potwierdzenie).</li>
         <li>Wstępne wypełnienie formularza poprzednimi odpowiedziami przy ponownej wysyłce.</li>
-        <li>Prosty widok odpowiedzi dla Michała z filtrami, jeśli gości będzie dużo.</li>
         <li>Wersja po polsku, jeśli pojawią się kolacje w Polsce.</li>
       </ul>
     </div>
@@ -382,11 +438,12 @@ td:first-child { white-space: nowrap; font-style: italic; }
 <section id="prototyp">
   <span class="no">PROTOTYP</span>
   <h2>Klikalna wersja</h2>
-  <p>Działający prototyp pokazuje wszystkie pięć rozdziałów na trzech przykładowych gościach. Zdjęcia zastępują na razie ciemne kadry ze świecami. Po otrzymaniu prawdziwych zdjęć wystarczy podmienić pliki. Daty, miejsca i opisy kolacji są przykładowe.</p>
+  <p>Działający prototyp pokazuje wszystkie pięć rozdziałów na trzech przykładowych gościach oraz panel Michała. Zdjęcia zastępują na razie ciemne kadry ze świecami. Po otrzymaniu prawdziwych zdjęć wystarczy podmienić pliki. Daty, miejsca i opisy kolacji są przykładowe.</p>
   <ul class="demo-list">
     <li><code>/t/k7q2m9xa4d</code> — Sarah: jedna kolacja i zdanie od Michała</li>
     <li><code>/t/r3v8n1pz6e</code> — James: trzy kolacje, wariant „Your Tables”</li>
     <li><code>/t/w5h9c4tb2y</code> — Anna: kolacja bez zdjęcia grupowego</li>
+    <li><code>/host</code> — Host’s Book: panel Michała na fikcyjnych danych (14 gości, introdukcje, podpowiedzi)</li>
   </ul>
 </section>
 

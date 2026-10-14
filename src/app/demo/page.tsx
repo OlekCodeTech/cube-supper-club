@@ -25,6 +25,14 @@ export default function Demo() {
           </li>
         ))}
       </ul>
+      <ul className="demo" style={{ marginTop: 40 }}>
+        <li>
+          <Link href="/host/">
+            <span className="demo__name">Host’s Book</span>
+            <span className="demo__meta">Michał’s private back office — guests, answers, introductions</span>
+          </Link>
+        </li>
+      </ul>
     </main>
   );
 }
