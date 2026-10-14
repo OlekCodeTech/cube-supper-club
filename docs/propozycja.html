@@ -1,0 +1,411 @@
+<title>Keep the Conversation Going</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap">
+<style>
+/* Layout: a private letter-like proposal; one reading column, chapter marks in roman numerals mirroring the prototype. */
+:root {
+  --bg: #f4efe7;
+  --surface: #ebe3d6;
+  --fg: #1a1613;
+  --muted: #6b6158;
+  --line: rgba(26, 22, 19, 0.14);
+  --accent: #8a6d4c;
+  --night: #14110f;
+  --on-night: #f1ebe2;
+  --display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --text: "Cormorant Garamond", Georgia, serif;
+  --ui: "Jost", "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14110f; --surface: #1d1916; --fg: #f1ebe2; --muted: #a59a8d;
+    --line: rgba(241, 235, 226, 0.14); --accent: #c3a47e; --night: #0d0b0a; --on-night: #f1ebe2;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #14110f; --surface: #1d1916; --fg: #f1ebe2; --muted: #a59a8d;
+  --line: rgba(241, 235, 226, 0.14); --accent: #c3a47e; --night: #0d0b0a; --on-night: #f1ebe2;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--text);
+  font-size: 20px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+.wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding-inline: clamp(16px, 5vw, 40px);
+  padding-block: 0 96px;
+}
+h1, h2, h3 { font-family: var(--display); font-weight: 300; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(46px, 8vw, 78px); line-height: 1; }
+h1 em, h2 em { font-style: italic; }
+h2 { font-size: clamp(34px, 5vw, 48px); line-height: 1.05; }
+h3 { font-size: 25px; font-weight: 400; margin-top: 36px; }
+p { margin: 0 0 1em; }
+.label, .meta, th, .chip {
+  font-family: var(--ui);
+  font-size: 11.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+a { color: var(--accent); }
+strong { font-weight: 500; }
+
+/* Masthead */
+.mast {
+  padding-block: 56px 72px;
+  text-align: center;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 72px;
+}
+.mark { font-size: 28px; letter-spacing: 0.42em; margin-right: -0.42em; line-height: 1; }
+.mark-sub { font-family: var(--ui); font-size: 10px; letter-spacing: 0.34em; text-transform: uppercase; margin-top: 8px; color: var(--muted); }
+.mast h1 { margin-top: 56px; }
+.mast .lede { font-style: italic; font-size: 24px; color: var(--muted); margin: 22px auto 0; max-width: 34ch; line-height: 1.4; }
+.mast .meta { color: var(--muted); margin-top: 32px; }
+
+/* Thesis */
+.thesis {
+  background: var(--night);
+  color: var(--on-night);
+  padding: clamp(32px, 6vw, 56px);
+  margin: 0 0 80px;
+  text-align: center;
+}
+.thesis p { font-family: var(--display); font-size: clamp(24px, 3.4vw, 32px); font-weight: 300; line-height: 1.3; margin: 0; }
+.thesis p + p { margin-top: 6px; }
+.thesis em { color: #c3a47e; }
+
+/* Sections */
+section { margin-bottom: 88px; }
+.no {
+  display: block;
+  font-family: var(--ui);
+  font-size: 11.5px;
+  letter-spacing: 0.4em;
+  color: var(--accent);
+  margin-bottom: 18px;
+}
+section > h2 { margin-bottom: 28px; }
+ul, ol { padding-left: 1.2em; margin: 0 0 1em; }
+li { margin-bottom: 0.35em; }
+li::marker { color: var(--accent); }
+
+/* Journey */
+.journey { list-style: none; padding: 0; margin: 32px 0 0; border-top: 1px solid var(--line); }
+.journey > li {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr);
+  gap: 4px 20px;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--line);
+  margin: 0;
+}
+.journey .rn { font-family: var(--display); font-size: 40px; font-weight: 300; line-height: 1; color: var(--accent); grid-row: span 3; }
+.journey h3 { margin: 0; font-size: 26px; }
+.journey h3 small { font-family: var(--ui); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-left: 10px; font-weight: 400; }
+.journey p { margin: 6px 0 0; }
+.journey .feel { font-style: italic; color: var(--muted); }
+
+/* Callout */
+.decision {
+  border-left: 1px solid var(--accent);
+  padding: 4px 0 4px 24px;
+  margin: 32px 0;
+}
+.decision .label { color: var(--accent); display: block; margin-bottom: 8px; }
+
+/* Tables */
+.table-wrap { overflow-x: auto; margin: 24px 0; }
+table { border-collapse: collapse; width: 100%; min-width: 520px; font-size: 18px; }
+th { text-align: left; color: var(--muted); padding: 10px 14px 10px 0; border-bottom: 1px solid var(--fg); }
+td { padding: 14px 14px 14px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+td:first-child { white-space: nowrap; font-style: italic; }
+
+/* Palette */
+.swatches { display: flex; flex-wrap: wrap; gap: 16px; margin: 24px 0 8px; }
+.sw { flex: 1 1 140px; min-width: 0; }
+.sw i { display: block; height: 64px; border: 1px solid var(--line); }
+.sw span { display: block; font-family: var(--ui); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-top: 8px; }
+
+/* Type specimen */
+.specimen {
+  background: var(--surface);
+  padding: clamp(24px, 4vw, 40px);
+  margin: 24px 0;
+}
+.specimen .big { font-family: var(--display); font-size: clamp(40px, 7vw, 64px); font-weight: 300; line-height: 1; }
+.specimen .big em { color: var(--accent); }
+.specimen .small { font-family: var(--ui); font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); margin-top: 14px; }
+
+/* Now / later */
+.split { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px 40px; margin-top: 24px; }
+.split > div { min-width: 0; }
+.split h3 { margin-top: 0; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+.chip { display: inline-block; color: var(--accent); margin-bottom: 4px; }
+
+/* Flow diagram */
+.flow { overflow-x: auto; margin: 28px 0; }
+.flow svg { display: block; min-width: 620px; width: 100%; height: auto; }
+.flow text { font-family: var(--ui); font-size: 12px; letter-spacing: 0.06em; fill: var(--fg); }
+.flow .sub { fill: var(--muted); font-size: 11px; }
+.flow rect { fill: var(--bg); stroke: var(--line); stroke-width: 1; }
+.flow .hl { stroke: var(--accent); }
+.flow path { stroke: var(--muted); stroke-width: 1; fill: none; }
+.flow .arrow { fill: var(--muted); stroke: none; }
+
+.demo-list { list-style: none; padding: 0; border-top: 1px solid var(--line); }
+.demo-list li { padding: 14px 0; border-bottom: 1px solid var(--line); margin: 0; }
+.demo-list code { font-family: var(--ui); font-size: 14px; color: var(--accent); }
+
+.foot { border-top: 1px solid var(--line); padding-top: 28px; color: var(--muted); font-size: 18px; }
+.sign { font-style: italic; font-size: 26px; color: var(--accent); margin-top: 8px; }
+
+@media (max-width: 520px) {
+  .journey > li { grid-template-columns: 44px minmax(0, 1fr); gap: 4px 14px; }
+  .journey .rn { font-size: 30px; }
+  .journey h3 small { display: block; margin: 4px 0 0; }
+}
+</style>
+
+<div class="wrap">
+
+<header class="mast">
+  <div class="mark">CUBE</div>
+  <div class="mark-sub">Supper Club</div>
+  <h1>Keep the <em>conversation going</em></h1>
+  <p class="lede">Propozycja strony dla gości, którzy już siedzieli przy stole Cube.</p>
+  <p class="meta">Piotr Olek · OlekCodeTech · 14 października 2026</p>
+</header>
+
+<div class="thesis">
+  <p>Ta strona nie jest serwisem.</p>
+  <p><em>To list od Michała,</em> który otwiera się na Twojej kolacji.</p>
+</div>
+
+<section id="koncepcja">
+  <span class="no">I — CONCEPT</span>
+  <h2>Jak rozumiem ideę</h2>
+  <p>Brief mówi wprost, że wartością Cube są ludzie i relacje, a nie same kolacje. Dlatego strona dla powracających gości nie może wyglądać jak narzędzie. Nie ma na niej kont, logowania, profili, listy gości ani dopasowań. Jest jedna opowieść w pięciu krótkich rozdziałach. Prowadzi od wspomnienia konkretnego wieczoru do zaproszenia, żeby powiedzieć Michałowi, co jest teraz ważne.</p>
+  <p>Narratorem jest Michał. Teksty piszę jego głosem, w pierwszej osobie, z podpisem. Gość nie wypełnia formularza dla „organizatora”. Odpowiada osobie, która go zaprosiła i która osobiście zrobi z tego użytek.</p>
+  <p>Każdy powracający gość dostaje osobisty link. Strona wie, na której kolacji był (lub na których), i od tego zaczyna. Jedyną rzeczą, o którą prosimy, jest kilka zdań o tym, gdzie gość jest teraz. Wszystko inne służy temu, żeby ta prośba wydała się naturalna.</p>
+</section>
+
+<section id="journey">
+  <span class="no">II — USER JOURNEY</span>
+  <h2>Pięć rozdziałów na jednej stronie</h2>
+  <p>Wejście to zawsze krótki, osobisty mail od Michała z jednym linkiem. Po kliknięciu gość przechodzi przez pięć rozdziałów, przewijając w dół.</p>
+
+  <div class="flow" role="img" aria-label="Schemat: mail od Michała, osobisty link, pięć rozdziałów strony, odpowiedzi trafiają tylko do Michała">
+    <svg viewBox="0 0 760 150" xmlns="http://www.w3.org/2000/svg">
+      <defs><marker id="ah" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path class="arrow" d="M0 0 L8 4 L0 8 z"/></marker></defs>
+      <rect x="4" y="40" width="120" height="64"/>
+      <text x="64" y="68" text-anchor="middle">Mail od Michała</text>
+      <text x="64" y="86" text-anchor="middle" class="sub">jeden osobisty link</text>
+      <path d="M124 72 H164" marker-end="url(#ah)"/>
+      <rect x="168" y="40" width="300" height="64" class="hl"/>
+      <text x="318" y="66" text-anchor="middle">Strona /t/‹token›</text>
+      <text x="318" y="86" text-anchor="middle" class="sub">I Your Table · II Many · III Interlude · IV Talk · V End</text>
+      <path d="M468 72 H508" marker-end="url(#ah)"/>
+      <rect x="512" y="40" width="112" height="64"/>
+      <text x="568" y="68" text-anchor="middle">Odpowiedzi</text>
+      <text x="568" y="86" text-anchor="middle" class="sub">baza + mail</text>
+      <path d="M624 72 H664" marker-end="url(#ah)"/>
+      <rect x="668" y="40" width="88" height="64"/>
+      <text x="712" y="68" text-anchor="middle">Michał</text>
+      <text x="712" y="86" text-anchor="middle" class="sub">introdukcje</text>
+    </svg>
+  </div>
+
+  <ol class="journey">
+    <li>
+      <span class="rn">I</span>
+      <h3>Your Table <small>rozpoznanie</small></h3>
+      <p>Imię gościa, numer stołu, data i miejsce, a pod spodem duże zdjęcie grupowe z tego wieczoru. Opcjonalnie jedno zdanie od Michała o tym wieczorze albo o tej osobie. Gość z kilku kolacji widzi „Your Tables” i krótką listę swoich wieczorów.</p>
+      <p class="feel">„To moja kolacja.”</p>
+    </li>
+    <li>
+      <span class="rn">II</span>
+      <h3>One table became many <small>ciągłość</small></h3>
+      <p>Wszystkie dziewięć kolacji w nieregularnym, editorialowym układzie. Zdjęcia są głównym elementem, daty i numery stołów to subtelne podpisy. Stoły gościa są wyróżnione cienką obwódką i znakiem „Your table”. Bez liczników, statystyk i diagramów.</p>
+      <p class="feel">„To coś większego niż jeden wieczór.”</p>
+    </li>
+    <li>
+      <span class="rn">III</span>
+      <h3>The dinner ends <small>zwrot</small></h3>
+      <p>Ciemny ekran z samym tekstem: „The dinner ends. The conversation doesn’t have to.” Pod spodem dwa zdania o tym, że wartością może być perspektywa, rekomendacja albo ktoś, z kim warto się zobaczyć, a niekoniecznie biznes. To pauza między przeszłością a przyszłością.</p>
+      <p class="feel">„Warto do tego wrócić.”</p>
+    </li>
+    <li>
+      <span class="rn">IV</span>
+      <h3>Keep the conversation going <small>rozmowa</small></h3>
+      <p>Krótki list od Michała, a pod nim pięć otwartych pytań. Wszystkie są opcjonalne, a jedno zdanie wystarczy. Na końcu pytanie, jak Michał może użyć odpowiedzi: „tylko dla mnie” (domyślnie) albo „mogę o tym wspomnieć przy introdukcji”.</p>
+      <p class="feel">„Mogę powiedzieć, co jest dla mnie ważne.”</p>
+    </li>
+    <li>
+      <span class="rn">V</span>
+      <h3>A quiet ending <small>zamknięcie</small></h3>
+      <p>Formularz znika, a w jego miejscu pojawia się „The conversation continues.”, podziękowanie i podpis Michała. Jest jeszcze dyskretny link „Change what you shared” i nic więcej. Gość, który wraca na stronę później, widzi rozdziały I–III i to zakończenie.</p>
+      <p class="feel">„To, co przekazałem, ma sens.”</p>
+    </li>
+  </ol>
+
+  <div class="decision">
+    <span class="label">Jedna strona czy kilka ekranów?</span>
+    <p>Rekomenduję jedną stronę z rozdziałami. Link otwiera się zwykle na telefonie, prosto z maila. Przewijanie jest najprostszym gestem i nie wymaga nawigacji ani przycisków „dalej”. Ciągłość jest tu też treścią: formularz nie jest osobnym, administracyjnym ekranem, tylko czwartym rozdziałem tej samej opowieści. Zakończenie pojawia się w miejscu formularza, bez przeładowania.</p>
+  </div>
+
+  <h3>Pytania w rozdziale IV</h3>
+  <ol>
+    <li>What are you working on at the moment?</li>
+    <li>What has caught your curiosity lately?</li>
+    <li>Is there something you’re looking for?</li>
+    <li>Who would you enjoy meeting?</li>
+    <li>And what could you bring to someone else?</li>
+  </ol>
+  <p>Kolejność jest celowa. Zaczynamy od gościa i jego teraźniejszości, potem przechodzimy do potrzeb, a kończymy na tym, co sam może dać. Ostatnie pytanie sprawia, że cała prośba brzmi jak wymiana, a nie ankieta.</p>
+</section>
+
+<section id="visual">
+  <span class="no">III — VISUAL DIRECTION</span>
+  <h2>Wieczór, archiwum, list</h2>
+  <p>Strona przeplata dwa tła. Ciemne sekcje to wieczór: wspomnienie kolacji, pauza i zakończenie. Jasne sekcje to papier: archiwum stołów i list od Michała. Ten rytm prowadzi przez opowieść bez dodatkowych ozdobników.</p>
+
+  <div class="swatches" aria-label="Paleta">
+    <div class="sw"><i style="background:#14110f"></i><span>Ink · wieczór</span></div>
+    <div class="sw"><i style="background:#f4efe7"></i><span>Paper · archiwum</span></div>
+    <div class="sw"><i style="background:#ebe3d6"></i><span>Paper 2 · karty</span></div>
+    <div class="sw"><i style="background:#b39470"></i><span>Brass · akcent</span></div>
+  </div>
+
+  <div class="specimen">
+    <div class="big">The conversation <em>continues.</em></div>
+    <div class="small">No. IV · 11 July 2024 · Ham Yard Hotel</div>
+  </div>
+
+  <ul>
+    <li><strong>Typografia.</strong> Cormorant Garamond w lekkiej wadze to nagłówki i list. Kursywa niesie emocję („became many.”, „continues.”). Jost w małych kapitalikach służy do dat i podpisów, jak w magazynie.</li>
+    <li><strong>Numeracja stołów cyframi rzymskimi</strong> (No. IV zamiast „Table 04”). To redakcyjny detal, który odróżnia Cube od strony eventowej.</li>
+    <li><strong>Zdjęcia.</strong> Tylko autentyczne zdjęcia grupowe z kolacji, lekko ujednolicone tonalnie, żeby dziewięć wieczorów wyglądało jak jedna seria. Bez portretów, stocków i ilustracji.</li>
+    <li><strong>Kolacja bez zdjęcia</strong> dostaje kartę typograficzną: duży numer VII, data, cienka linia i zdanie „No photograph. Only the conversations.” Wygląda jak zaprojektowany wyjątek, a nie jak brak.</li>
+    <li><strong>Dużo przestrzeni</strong>, jedna kolumna tekstu, żadnych kart, ikon ani przycisków poza jednym: „Send to Michał”.</li>
+  </ul>
+</section>
+
+<section id="interakcje">
+  <span class="no">IV — INTERACTIVE ELEMENTS</span>
+  <h2>Ruch tylko tam, gdzie wspiera opowieść</h2>
+  <ul>
+    <li><strong>Wejście:</strong> nagłówek „Your Table” i zdjęcie pojawiają się spokojnie, z lekkim opóźnieniem. To jedyny „moment” na stronie.</li>
+    <li><strong>Przewijanie:</strong> kolejne zdjęcia i teksty delikatnie wynurzają się przy przewijaniu. Druga linijka interludium („The conversation doesn’t have to.”) pojawia się chwilę po pierwszej.</li>
+    <li><strong>Formularz:</strong> pola bez ramek, tylko linia pod tekstem, która rośnie razem z odpowiedzią. Przycisk staje się aktywny po pierwszej odpowiedzi. Nie ma pól obowiązkowych ani walidacji, która by krzyczała.</li>
+    <li><strong>Zgoda:</strong> dwie opcje zapisane prostym językiem, domyślnie „tylko dla Michała”. To spełnia warunek z briefu, że informacje są udostępniane tylko wtedy, gdy jest to uzgodnione.</li>
+    <li><strong>Personalizacja:</strong> imię, kolacja lub kolacje, wyróżnienie w archiwum i opcjonalne zdanie od Michała. Ten ostatni element najmocniej buduje poczucie, że Cube pamięta.</li>
+    <li><strong>Dostępność:</strong> przy włączonym ograniczeniu animacji w systemie strona pokazuje się bez ruchu. Kontrast i rozmiary tekstu są czytelne na telefonie.</li>
+  </ul>
+</section>
+
+<section id="tech">
+  <span class="no">V — TECHNICAL APPROACH</span>
+  <h2>Osobisty link zamiast logowania</h2>
+  <ul>
+    <li><strong>Link:</strong> <code>…/t/k7q2m9xa4d</code>. Losowy, 10-znakowy token, którego nie da się zgadnąć i który nie zawiera imienia ani maila. Link działa jak klucz, więc gość nie zakłada konta i nie pamięta hasła. Strona jest wyłączona z wyszukiwarek.</li>
+    <li><strong>Co jest na stronie:</strong> tylko imię gościa, jego kolacje i wspólne archiwum. Nie ma nazwisk innych gości, kontaktów ani niczyich odpowiedzi. Nawet przekazany dalej link nie ujawnia nikogo innego.</li>
+    <li><strong>Dane:</strong> prosta tabela gości (imię, mail, kolacje, opcjonalna notatka, token) w arkuszu lub Airtable. Z niej generuje się statyczna strona (Next.js). Nowa kolacja to nowy wiersz i jedno zdjęcie, a potem przebudowanie strony. Bez panelu administracyjnego do utrzymania.</li>
+    <li><strong>Odpowiedzi:</strong> formularz wysyła je do małej funkcji serwerowej (np. Supabase), która zapisuje je w tabeli i od razu wysyła Michałowi maila z treścią. Michał czyta je w skrzynce lub w tabeli. Nie budujemy CRM-u.</li>
+    <li><strong>Wysyłka:</strong> maile wychodzą ze skrzynki Michała (mail merge), a nie z systemu newsletterowego. Mają wyglądać i brzmieć jak osobista wiadomość.</li>
+    <li><strong>RODO:</strong> krótka informacja o administratorze i celu przy formularzu, wybór sposobu użycia odpowiedzi oraz usunięcie danych na prośbę gościa.</li>
+    <li><strong>Hosting:</strong> statyczny hosting (np. Vercel lub Netlify) pod subdomeną, np. <code>table.cubesupperclub.com</code>. Koszty utrzymania są bliskie zera.</li>
+  </ul>
+
+  <h3>Jak to rośnie</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Sytuacja</th><th>Co się dzieje</th></tr></thead>
+      <tbody>
+        <tr><td>Nowa kolacja</td><td>Wiersz w tabeli kolacji i zdjęcie. Pojawia się w archiwum wszystkich gości.</td></tr>
+        <tr><td>Gość wraca drugi raz</td><td>Dopisujemy kolację do jego wiersza. Strona sama przechodzi w wariant „Your Tables”.</td></tr>
+        <tr><td>Po pół roku</td><td>Michał wysyła ten sam link z pytaniem „Has anything changed?”. Gość widzi swoje poprzednie odpowiedzi i może je zmienić.</td></tr>
+        <tr><td>Nowi goście</td><td>Ta sama struktura linków, ale inny wariant strony: zaproszenie, sens kolacji i potwierdzenie udziału. To osobny etap.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="rekomendacje">
+  <span class="no">VI — RECOMMENDATIONS</span>
+  <h2>Co od razu, co później</h2>
+  <div class="split">
+    <div>
+      <h3>Teraz</h3>
+      <ul>
+        <li>Strona z pięcioma rozdziałami dla powracających gości.</li>
+        <li>Osobiste linki dla wszystkich gości z 9 kolacji.</li>
+        <li>Formularz, zapis odpowiedzi i mail do Michała.</li>
+        <li>Wariant dla gości z kilku kolacji.</li>
+        <li>Karta typograficzna dla kolacji bez zdjęcia.</li>
+        <li>Szablon maila od Michała.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Później</h3>
+      <ul>
+        <li>Ścieżka dla nowych gości (zaproszenie i potwierdzenie).</li>
+        <li>Wstępne wypełnienie formularza poprzednimi odpowiedziami przy ponownej wysyłce.</li>
+        <li>Prosty widok odpowiedzi dla Michała z filtrami, jeśli gości będzie dużo.</li>
+        <li>Wersja po polsku, jeśli pojawią się kolacje w Polsce.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Moje propozycje spoza briefu</h3>
+  <ul>
+    <li><strong>Jedno zdanie od Michała dla każdego gościa.</strong> To najmocniejszy element rozpoznania i nic nie kosztuje technicznie, tylko kilka minut Michała na osobę. Pole jest opcjonalne: jeśli zostanie puste, strona pokaże zdanie o samej kolacji.</li>
+    <li><strong>Detal z kolacji zamiast drugiego zdjęcia.</strong> Jeśli zachowało się menu albo karta z nazwiskiem, jego skan może zastąpić brakujące zdjęcie albo stać się podpisem pod stołem.</li>
+    <li><strong>Introdukcja zawsze mailem od Michała</strong>, nigdy przez stronę. Strona zbiera kontekst, a relacje dzieją się poza nią. To utrzymuje obietnicę z briefu.</li>
+    <li><strong>Nie pokazujemy liczb</strong> („100+ guests”, „10 dinners”). Zamiast tego słowa: „nine tables”. Liczba robi z kolacji wydarzenie, a słowo pozostaje opowieścią.</li>
+  </ul>
+  <h3>Czego świadomie nie robimy</h3>
+  <p>Kart innych gości z odsłanianiem, linków do LinkedIn, list „you should meet”, diagramów sieci, odliczania wolnych miejsc ani portretów generowanych przez AI. Każdy z tych elementów wygląda efektownie, ale zamienia Cube w platformę networkingową, przed którą brief przestrzega.</p>
+</section>
+
+<section id="prototyp">
+  <span class="no">PROTOTYP</span>
+  <h2>Klikalna wersja</h2>
+  <p>Działający prototyp pokazuje wszystkie pięć rozdziałów na trzech przykładowych gościach. Zdjęcia zastępują na razie ciemne kadry ze świecami. Po otrzymaniu prawdziwych zdjęć wystarczy podmienić pliki. Daty, miejsca i opisy kolacji są przykładowe.</p>
+  <ul class="demo-list">
+    <li><code>/t/k7q2m9xa4d</code> — Sarah: jedna kolacja i zdanie od Michała</li>
+    <li><code>/t/r3v8n1pz6e</code> — James: trzy kolacje, wariant „Your Tables”</li>
+    <li><code>/t/w5h9c4tb2y</code> — Anna: kolacja bez zdjęcia grupowego</li>
+  </ul>
+</section>
+
+<section id="potrzebne">
+  <span class="no">POTRZEBNE OD WAS</span>
+  <h2>Żeby wdrożyć wersję właściwą</h2>
+  <ul>
+    <li>8 zdjęć grupowych w oryginalnej rozdzielczości.</li>
+    <li>Daty, miejsca i ewentualnie jedno zdanie o każdej z 9 kolacji.</li>
+    <li>Lista gości: imię, mail, na których kolacjach byli.</li>
+    <li>Opcjonalnie: jedno zdanie od Michała dla wybranych gości.</li>
+    <li>Akceptacja tekstów (list w rozdziale IV, pytania, zakończenie) w głosie Michała.</li>
+    <li>Domena lub subdomena oraz dane administratora do informacji RODO.</li>
+  </ul>
+</section>
+
+<footer class="foot">
+  <p>Nie budujemy strony o kolacjach. Budujemy miejsce, w którym to, co zaczęło się przy stole, może mieć dalszy ciąg.</p>
+  <p class="sign">Piotr</p>
+</footer>
+
+</div>
