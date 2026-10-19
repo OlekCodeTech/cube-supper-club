@@ -1,0 +1,24 @@
+1:"$Sreact.fragment"
+2:I[90383,["/cube-supper-club/_next/static/chunks/3fntmmi971322.js","/cube-supper-club/_next/static/chunks/31bftexxr1_hz.js"],"InvitationPage"]
+3:I[97367,["/cube-supper-club/_next/static/chunks/3fntmmi971322.js"],"OutletBoundary"]
+4:"$Sreact.suspense"
+8:I[97367,["/cube-supper-club/_next/static/chunks/3fntmmi971322.js"],"ViewportBoundary"]
+9:I[97367,["/cube-supper-club/_next/static/chunks/3fntmmi971322.js"],"MetadataBoundary"]
+b:I[39756,["/cube-supper-club/_next/static/chunks/3fntmmi971322.js"],"default"]
+c:I[37457,["/cube-supper-club/_next/static/chunks/3fntmmi971322.js"],"default"]
+10:I[22016,["/cube-supper-club/_next/static/chunks/3fntmmi971322.js","/cube-supper-club/_next/static/chunks/22i43cg4l4-dq.js"],""]
+:HL["/cube-supper-club/_next/static/chunks/1z_q96o9-cqfr.css","style"]
+7:X
+e:X
+e:C
+0:{"buildId":"jJYycO9VGbHrB7SZlbGTl","data":[{"rsc":["$","$1","c",{"children":[["$","$L2",null,{"invite":{"token":"v6b1n8qx3m","firstName":"Charlotte","tableId":"t10","why":"You think about places the way few people do. I’d love you to meet the people around this table, and I think they’d love to meet you."},"table":{"id":"t10","number":10,"date":"2026-11-19","time":"19:00 – late","venue":"Ham Yard Hotel","city":"London","seats":10,"confirmed":6,"fields":["Hospitality","Fashion","Perfume","Investment","Architecture","Wine"],"replyBy":"2026-11-05"}}],[["$","script","script-0",{"src":"/cube-supper-club/_next/static/chunks/31bftexxr1_hz.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":"$@6","staleTime":"$7","varyParams":null},{"rsc":["$","$1","h",{"children":[null,["$","$L8",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","2",{"name":"theme-color","content":"#14110f"}]]}],["$","div",null,{"hidden":true,"children":["$","$L9",null,{"children":["$","$4",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Cube Supper Club"}],["$","meta","1",{"name":"description","content":"A private page for the guests of Cube Supper Club."}],["$","meta","2",{"name":"robots","content":"noindex, nofollow"}]]}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"isPartial":"$@a","staleTime":"$7","varyParams":null},{"rsc":["$","$1","c",{"children":[null,["$","$Lb",null,{"parallelRouterKey":"children","template":["$","$Lc",null,{}]}]]}],"isPartial":"$@d","staleTime":"$7","varyParams":"$e"},{"rsc":["$","$1","c",{"children":[null,["$","$Lb",null,{"parallelRouterKey":"children","template":["$","$Lc",null,{}]}]]}],"isPartial":"$@f","staleTime":"$7","varyParams":"$e"},{"rsc":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/cube-supper-club/_next/static/chunks/1z_q96o9-cqfr.css","precedence":"next"}],["$","script","script-0",{"src":"/cube-supper-club/_next/static/chunks/3fntmmi971322.js","async":true}]],["$","html",null,{"lang":"en","className":"cormorant_garamond_b7ca6413-module__Iyw3Sa__variable jost_24e7b26a-module__2hB5iG__variable","children":["$","body",null,{"children":["$","$Lb",null,{"parallelRouterKey":"children","template":["$","$Lc",null,{}],"notFound":[["$","main",null,{"className":"door","children":[["$","p",null,{"className":"mast__mark","children":"CUBE"}],["$","p",null,{"className":"mast__sub","children":"Supper Club"}],["$","span",null,{"className":"door__rule"}],["$","p",null,{"className":"door__text","children":["We don’t recognise this link.",["$","br",null,{}],"If it came from Michał, please reply to his message."]}],["$","$L10",null,{"className":"quiet-link","href":"/","children":"Back"}]]}],[]]}]}]}]]}],"isPartial":"$@11","staleTime":"$7","varyParams":null}],"isUpgradeableISRFallback":false,"a":"$@12","rootVaryParams":null,"needsRuntimeRequest":"$@13"}
+5:null
+7:300
+13:true
+7:C
+12:0
+a:"$undefined"
+d:"$undefined"
+f:"$undefined"
+11:"$undefined"
+6:"$undefined"
