@@ -184,14 +184,35 @@ td:first-child { white-space: nowrap; font-style: italic; }
   <div class="mark">CUBE</div>
   <div class="mark-sub">Supper Club</div>
   <h1>Keep the <em>conversation going</em></h1>
-  <p class="lede">Propozycja strony dla gości, którzy już siedzieli przy stole Cube.</p>
-  <p class="meta">Piotr Olek · OlekCodeTech · 14 października 2026</p>
+  <p class="lede">Propozycja strony i zaplecza dla Cube Supper Club: od pierwszego zaproszenia do rozmów, które trwają po kolacji.</p>
+  <p class="meta">Piotr Olek · OlekCodeTech · 19 października 2026</p>
 </header>
 
 <div class="thesis">
   <p>Ta strona nie jest serwisem.</p>
   <p><em>To list od Michała,</em> który otwiera się na Twojej kolacji.</p>
 </div>
+
+<section id="w-skrocie">
+  <span class="no">W SKRÓCIE</span>
+  <h2>Cztery części, jedna ścieżka gościa</h2>
+  <p>Brief skupia się na gościach powracających i to jest serce propozycji. Żeby było widać, jak całość działa razem, w prototypie są też pozostałe części: wizytówka dla kogoś, kto szuka Cube w internecie, zaproszenie dla nowego gościa i prywatny panel Michała.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Część</th><th>Dla kogo i po co</th><th>Kiedy</th></tr></thead>
+      <tbody>
+        <tr><td>Wizytówka</td><td>Każdy, kto wpisze „Cube Supper Club” w Google. Buduje zaufanie przed pierwszym zaproszeniem, nie sprzedaje miejsc.</td><td>Od razu</td></tr>
+        <tr><td>Zaproszenie</td><td>Nowy gość z osobistym linkiem. Dlaczego on, czym jest Cube, jak wygląda wieczór, kto będzie przy stole, potwierdzenie.</td><td>Etap 2</td></tr>
+        <tr><td>Your Table</td><td>Gość powracający. Wspomnienie kolacji, wszystkie stoły, kilka zdań o tym, co teraz. Główny temat briefu.</td><td>Od razu</td></tr>
+        <tr><td>Host’s Book</td><td>Tylko Michał. Odpowiedzi, notatki, introdukcje za zgodą obu stron, szkice maili.</td><td>Od razu, rozwijany etapami</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="decision">
+    <span class="label">Prototyp do przeklikania</span>
+    <p>Najlepiej na telefonie, tak jak goście otworzą link z maila: <a href="PROTOTYPE_URL">PROTOTYPE_LABEL</a>. Zdjęcia, daty i osoby są przykładowe. Ciemne kadry ze świecami zastąpią prawdziwe zdjęcia z kolacji.</p>
+  </div>
+</section>
 
 <section id="koncepcja">
   <span class="no">I — CONCEPT</span>
@@ -342,6 +363,26 @@ td:first-child { white-space: nowrap; font-style: italic; }
   </div>
 </section>
 
+<section id="nowi-goscie">
+  <span class="no">WIZYTÓWKA I ZAPROSZENIE</span>
+  <h2>Co widzi ktoś, kto jeszcze nie siedział przy stole</h2>
+  <h3>Wizytówka zamiast serwisu</h3>
+  <p>Ktoś, kto dostaje zaproszenie od nieznajomego, najpierw wpisze „Cube Supper Club” w Google. Brief mówi, że nowy gość ma poczuć zaufanie. Dlatego proponuję jedną spokojną stronę, a nie serwis: hasło „Ten people. One table.”, cztery zdania idei z briefu, trzy kroki („An invitation”, „The table”, „Afterwards”), pasek dotychczasowych stołów bez nazwisk i adres do Michała z dopiskiem, że miejsca nie da się zarezerwować, można jedynie kogoś polecić. Nie ma menu, kalendarza wydarzeń, cennika ani zapisów.</p>
+  <h3>Zaproszenie odpowiada na pięć pytań z briefu</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Pytanie z briefu</th><th>Gdzie jest odpowiedź</th></tr></thead>
+      <tbody>
+        <tr><td>Dlaczego zostałem zaproszony?</td><td>Pierwszy ekran: imię gościa i jedno zdanie od Michała, dlaczego właśnie on.</td></tr>
+        <tr><td>Czym jest Cube?</td><td>„Not an event. A table.” Bez biletów, identyfikatorów i prezentacji, jest tylko stół.</td></tr>
+        <tr><td>Czego się spodziewać?</td><td>Przebieg wieczoru w trzech punktach: przyjście, kolacja, „the table stays as long as it wants to”.</td></tr>
+        <tr><td>Kto będzie przy stole i dlaczego to ważne?</td><td>Branże zamiast nazwisk (hospitality, fashion, perfume…) oraz stół z dziesięcioma miejscami, który się zapełnia. Michał opowie o współbiesiadnikach kilka dni przed kolacją.</td></tr>
+        <tr><td>Co mam zrobić?</td><td>Trzy odpowiedzi: „tak”, „muszę sprawdzić” (miejsce czeka do terminu), „nie mogę”. Przy „tak” pytanie o dietę i dodanie do kalendarza.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
 <section id="host">
   <span class="no">VI — BEHIND THE TABLE</span>
   <h2>Host’s Book: zaplecze, które widzi tylko Michał</h2>
@@ -411,13 +452,15 @@ td:first-child { white-space: nowrap; font-style: italic; }
         <li>Karta typograficzna dla kolacji bez zdjęcia.</li>
         <li>Szablon maila od Michała.</li>
         <li>Host’s Book, etap 1: goście, odpowiedzi, notatki, linki.</li>
+        <li>Wizytówka pod adresem głównym.</li>
       </ul>
     </div>
     <div>
       <h3>Później</h3>
       <ul>
         <li>Host’s Book, etap 2: rejestr introdukcji i podpowiedzi AI.</li>
-        <li>Host’s Book, etap 3: planer stołu i ścieżka nowych gości (zaproszenie i potwierdzenie).</li>
+        <li>Zaproszenia dla nowych gości z potwierdzeniami widocznymi w Host’s Book.</li>
+        <li>Host’s Book, etap 3: planer następnego stołu.</li>
         <li>Wstępne wypełnienie formularza poprzednimi odpowiedziami przy ponownej wysyłce.</li>
         <li>Wersja po polsku, jeśli pojawią się kolacje w Polsce.</li>
       </ul>
@@ -432,14 +475,16 @@ td:first-child { white-space: nowrap; font-style: italic; }
     <li><strong>Nie pokazujemy liczb</strong> („100+ guests”, „10 dinners”). Zamiast tego słowa: „nine tables”. Liczba robi z kolacji wydarzenie, a słowo pozostaje opowieścią.</li>
   </ul>
   <h3>Czego świadomie nie robimy</h3>
-  <p>Kart innych gości z odsłanianiem, linków do LinkedIn, list „you should meet”, diagramów sieci, odliczania wolnych miejsc ani portretów generowanych przez AI. Każdy z tych elementów wygląda efektownie, ale zamienia Cube w platformę networkingową, przed którą brief przestrzega.</p>
+  <p>Kart innych gości z odsłanianiem, linków do LinkedIn, list „you should meet”, diagramów sieci ani portretów generowanych przez AI. Liczba miejsc pojawia się tylko w zaproszeniu, jako obraz stołu, który się zapełnia, a nie jako licznik sprzedaży. Każdy z tych elementów wygląda efektownie, ale zamienia Cube w platformę networkingową, przed którą brief przestrzega.</p>
 </section>
 
 <section id="prototyp">
   <span class="no">PROTOTYP</span>
   <h2>Klikalna wersja</h2>
-  <p>Działający prototyp pokazuje wszystkie pięć rozdziałów na trzech przykładowych gościach oraz panel Michała. Zdjęcia zastępują na razie ciemne kadry ze świecami. Po otrzymaniu prawdziwych zdjęć wystarczy podmienić pliki. Daty, miejsca i opisy kolacji są przykładowe.</p>
+  <p>Prototyp pokazuje wszystkie cztery części. Przewodnik po polsku jest pod adresem <code>/demo</code>. Zdjęcia zastępują na razie ciemne kadry ze świecami. Po otrzymaniu prawdziwych zdjęć wystarczy podmienić pliki. Daty, miejsca i opisy kolacji są przykładowe.</p>
   <ul class="demo-list">
+    <li><code>/</code> — wizytówka Cube</li>
+    <li><code>/i/v6b1n8qx3m</code> — Charlotte: zaproszenie na Table X</li>
     <li><code>/t/k7q2m9xa4d</code> — Sarah: jedna kolacja i zdanie od Michała</li>
     <li><code>/t/r3v8n1pz6e</code> — James: trzy kolacje, wariant „Your Tables”</li>
     <li><code>/t/w5h9c4tb2y</code> — Anna: kolacja bez zdjęcia grupowego</li>

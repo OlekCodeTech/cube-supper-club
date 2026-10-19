@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { type Dinner, type Guest, NUMBER_WORDS, formatDate, roman } from "@/data/dinners";
 import { TablePhoto } from "./TablePhoto";
 import { submitConversation, type Answers } from "@/lib/submit";
+import { AutoGrow, useReveal } from "@/lib/reveal";
 
 const QUESTIONS: { key: keyof Answers; q: string; hint: string }[] = [
   { key: "workingOn", q: "What are you working on at the moment?", hint: "A project, a venture, a new chapter…" },
@@ -14,39 +15,6 @@ const QUESTIONS: { key: keyof Answers; q: string; hint: string }[] = [
 ];
 
 const EMPTY: Answers = { workingOn: "", curiousAbout: "", lookingFor: "", wouldMeet: "", canOffer: "", sharing: "private" };
-
-function useReveal(dep: unknown) {
-  useEffect(() => {
-    const els = document.querySelectorAll<HTMLElement>("[data-reveal]:not(.is-in)");
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) {
-      els.forEach((el) => el.classList.add("is-in"));
-      return;
-    }
-    const io = new IntersectionObserver(
-      (entries) =>
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add("is-in");
-            io.unobserve(e.target);
-          }
-        }),
-      { rootMargin: "0px 0px -12% 0px", threshold: 0.12 },
-    );
-    els.forEach((el) => io.observe(el));
-    return () => io.disconnect();
-  }, [dep]);
-}
-
-function AutoGrow(props: React.TextareaHTMLAttributes<HTMLTextAreaElement>) {
-  const ref = useRef<HTMLTextAreaElement>(null);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    el.style.height = "auto";
-    el.style.height = el.scrollHeight + "px";
-  }, [props.value]);
-  return <textarea ref={ref} rows={1} {...props} />;
-}
 
 export function Experience({ guest, mine, all }: { guest: Guest; mine: Dinner[]; all: Dinner[] }) {
   const storageKey = `cube:conversation:${guest.token}`;
