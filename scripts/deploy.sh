@@ -5,6 +5,7 @@ cd "$(dirname "$0")/.."
 rm -rf out
 MSYS_NO_PATHCONV=1 NEXT_PUBLIC_BASE_PATH=/cube-supper-club npx next build
 python scripts/flatten-rsc.py out
+python scripts/wrap-proposal.py
 touch out/.nojekyll
 cd out
 git init -q -b gh-pages
